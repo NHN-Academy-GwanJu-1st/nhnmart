@@ -6,6 +6,17 @@
 </head>
 <body>
 <form method="post" action="/cart">
+
+
+
+    <c:out value="${foodStand}"></c:out>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 <c:forEach var="food" items="${foodList}">
     <c:out value="${food.getName()}"></c:out>
     <c:out value="${food.getPrice()}"></c:out>원
