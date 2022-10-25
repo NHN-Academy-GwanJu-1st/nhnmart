@@ -40,7 +40,7 @@ public class LoginCheckFilter implements Filter {
             if (excludeUrls.contains(((HttpServletRequest) request).getRequestURI())) {
                 chain.doFilter(request, response);
             } else {
-                ((HttpServletResponse) response).sendRedirect("/login.html");
+                ((HttpServletResponse) response).sendRedirect("/loginForm.jsp");
             }
         } else {
             chain.doFilter(request, response);

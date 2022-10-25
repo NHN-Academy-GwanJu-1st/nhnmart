@@ -1,5 +1,6 @@
 package com.nhnacademy.nhnmart.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,12 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = req.getSession(false);
         if (Objects.isNull(session)) {
-            resp.sendRedirect("/loginForm.html");
+            RequestDispatcher rd = req.getRequestDispatcher("/loginForm.jsp");
+            rd.forward(req, resp);
         } else {
-            resp.sendRedirect("/index.html");
+            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+            rd.forward(req,resp);
+//            resp.sendRedirect("/index.jsp");
         }
     }
     @Override

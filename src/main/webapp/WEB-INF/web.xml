@@ -13,11 +13,11 @@
         <init-param>
             <param-name>exclude-urls</param-name>
             <param-value>
-                /login.jsp
+                /loginForm.jsp
                 /login
                 /index.jsp     <!-- welcome page -->
                 /               <!-- root -->
-                /init
+                /init           <!-- init -->
                 /foods
             </param-value>
         </init-param>

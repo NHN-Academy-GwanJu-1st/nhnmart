@@ -25,32 +25,20 @@ public class InitServlet extends HttpServlet {
 
         ServletContext servletContext = req.getServletContext();
 
-        Enumeration<String> initParameterNames = servletContext.getInitParameterNames();
-        ArrayList<String> paramList = new ArrayList<>();
-
-        log.info(String.valueOf(Objects.isNull(initParameterNames)));
-
-        while (initParameterNames.hasMoreElements()) {
-
-            paramList.add(initParameterNames.nextElement());
-        }
-
         for (int i = 0; i < 2; i++) {
-            foodStand.add(new Food(paramList.get(0), Integer.parseInt(servletContext.getInitParameter(paramList.get(0)))));
+            foodStand.add(new Food("양파", Integer.parseInt(servletContext.getInitParameter("양파"))));
         }
         for (int i = 0; i < 5; i++) {
-            foodStand.add(new Food(paramList.get(1), Integer.parseInt(servletContext.getInitParameter(paramList.get(1)))));
+            foodStand.add(new Food("계란", Integer.parseInt(servletContext.getInitParameter("계란"))));
         }
         for (int i = 0; i < 10; i++) {
-            foodStand.add(new Food(paramList.get(2), Integer.parseInt(servletContext.getInitParameter(paramList.get(2)))));
+            foodStand.add(new Food("파", Integer.parseInt(servletContext.getInitParameter("파"))));
         }
         for (int i = 0; i < 20; i++) {
-            foodStand.add(new Food(paramList.get(3), Integer.parseInt(servletContext.getInitParameter(paramList.get(3)))));
+            foodStand.add(new Food("사과", Integer.parseInt(servletContext.getInitParameter("사과"))));
         }
 
-
         servletContext.setAttribute("foodStand", foodStand.getFoods());
-
 
         RequestDispatcher rd = req.getRequestDispatcher("/init.jsp");
         rd.forward(req, resp);
