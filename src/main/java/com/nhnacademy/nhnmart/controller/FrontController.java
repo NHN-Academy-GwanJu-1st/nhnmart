@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
 
 @Slf4j
 @WebServlet(name = "frontController", urlPatterns = "*.do")
@@ -16,11 +18,22 @@ public class FrontController extends HttpServlet {
 
     private static final String REDIRECT_PREFIX = "redirect:";
 
+    private static String locale = "ko";
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
+
+
+        /* session locale check */
+        if (req.getParameter("locale") != null) {
+            locale = req.getParameter("locale");
+        }
+        HttpSession session = req.getSession();
+        session.setAttribute("locale", locale);
+
 
         try {
             // 실제 처리 요청 servlet
@@ -45,31 +58,24 @@ public class FrontController extends HttpServlet {
     }
 
     private Command resolveServlet(String servletPath) {
-//        String processingServletPath = null;
-
         Command command = null;
 
         if ("/loginForm.do".equals(servletPath)) {
-//            processingServletPath = "/loginForm";
             command = new LoginFormController();
         } else if ("/login.do".equals(servletPath)) {
-//            processingServletPath = "/login";
             command = new LoginController();
         } else if ("/logout.do".equals(servletPath)) {
-//            processingServletPath = "/logout";
             command = new LogoutController();
         } else if ("/init.do".equals(servletPath)) {
-//            processingServletPath = "/init";
             command = new InitController();
         } else if ("/foods.do".equals(servletPath)) {
-//            processingServletPath = "/foods";
             command = new FoodsController();
         } else if ("/cartList.do".equals(servletPath)) {
-//            processingServletPath = "/cartList";    // cart get
             command = new CartListController();
         } else if ("/cart.do".equals(servletPath)) {
-//            processingServletPath = "/cart";    // cart post
             command = new CartController();
+        } else if ("/local.do".equals(servletPath)) {
+            command = new LocalController();
         }
 
 //        return processingServletPath;

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,13 +7,27 @@
 </head>
 <body>
 
+<c:if test="${sessionScope.locale == null}">
+    <fmt:setLocale value="ko"></fmt:setLocale>
+    <fmt:setBundle basename="message" var="message"></fmt:setBundle>
+</c:if>
+
+<c:if test="${sessionScope.locale != null}">
+    <fmt:setLocale value="${sessionScope.locale}"></fmt:setLocale>
+    <fmt:setBundle basename="message" var="message"></fmt:setBundle>
+</c:if>
+
+<fmt:bundle basename="message">
+
 <c:forEach items="${buyMap}" var="map">
-    ${map.key.getName()} ( ${map.key.getPrice()} 원) 총 ${map.value}개 = ${map.key.getPrice() * map.value} <br>
+    <fmt:message key="${map.key.getName()}"></fmt:message> ( ${map.key.getPrice()} <fmt:message key="원"></fmt:message>) ${map.value}<fmt:message key="개"></fmt:message> = ${map.key.getPrice() * map.value} <br>
 
     <c:set var="total" value="${total} + ${map.key.getPrice() * map.value}"></c:set>
 </c:forEach>
 
-총 금액 <c:out value="${totalPrice}"></c:out>
+<fmt:message key="총금액"></fmt:message> <c:out value="${totalPrice}"></c:out>
 
+
+</fmt:bundle>
 </body>
 </html>
