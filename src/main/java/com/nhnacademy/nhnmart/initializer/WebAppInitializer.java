@@ -20,5 +20,9 @@ public class WebAppInitializer implements ServletContainerInitializer {
         servletContext.setInitParameter("계란", "2000");
         servletContext.setInitParameter("파", "500");
         servletContext.setInitParameter("사과", "2000");
+
+        /* ID and Password*/
+        servletContext.setInitParameter("id", "admin");
+        servletContext.setInitParameter("password", "1234");
     }
 }

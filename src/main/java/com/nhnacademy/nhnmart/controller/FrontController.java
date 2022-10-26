@@ -22,25 +22,18 @@ public class FrontController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
 
-
         try {
             // 실제 처리 요청 servlet
-            String processingServletPath = resolveServlet(req.getServletPath());
+            Command command = resolveServlet(req.getServletPath());
 
-            /* RequestDispatcher include -> a.jsp -> b.jsp -> a.jsp
-             * 즉, 제어를 넘긴 대상 페이지의 처리가 완료된 후 결과와 함께 원래 페이지로 제어가 돌아오게 된다. */
-
-            RequestDispatcher rd = req.getRequestDispatcher(processingServletPath);
-            rd.include(req, resp);
-
-            String view = (String) req.getAttribute("view");
+            String view = command.excute(req, resp);
 
             if (view.startsWith(REDIRECT_PREFIX)) {
                 // redirect 하는 경우
                 resp.sendRedirect(view.substring(REDIRECT_PREFIX.length()));
             } else {
                 // redircet가 아니면 해당 jsp에 처리를 위임하고 include 설정으로 인해 그 결과를 돌려 받음
-                rd = req.getRequestDispatcher(view);
+                RequestDispatcher rd = req.getRequestDispatcher(view);
                 rd.include(req, resp);
             }
         } catch (Exception e) {
@@ -51,25 +44,35 @@ public class FrontController extends HttpServlet {
         }
     }
 
-    private String resolveServlet(String servletPath) {
-        String processingServletPath = null;
+    private Command resolveServlet(String servletPath) {
+//        String processingServletPath = null;
+
+        Command command = null;
 
         if ("/loginForm.do".equals(servletPath)) {
-            processingServletPath = "/loginForm";
+//            processingServletPath = "/loginForm";
+            command = new LoginFormController();
         } else if ("/login.do".equals(servletPath)) {
-            processingServletPath = "/login";
+//            processingServletPath = "/login";
+            command = new LoginController();
         } else if ("/logout.do".equals(servletPath)) {
-            processingServletPath = "/logout";
+//            processingServletPath = "/logout";
+            command = new LogoutController();
         } else if ("/init.do".equals(servletPath)) {
-            processingServletPath = "/init";
+//            processingServletPath = "/init";
+            command = new InitController();
         } else if ("/foods.do".equals(servletPath)) {
-            processingServletPath = "/foods";
+//            processingServletPath = "/foods";
+            command = new FoodsController();
         } else if ("/cartList.do".equals(servletPath)) {
-            processingServletPath = "/cartList";    // cart get
+//            processingServletPath = "/cartList";    // cart get
+            command = new CartListController();
         } else if ("/cart.do".equals(servletPath)) {
-            processingServletPath = "/cart";    // cart post
+//            processingServletPath = "/cart";    // cart post
+            command = new CartController();
         }
 
-        return processingServletPath;
+//        return processingServletPath;
+        return command;
     }
 }

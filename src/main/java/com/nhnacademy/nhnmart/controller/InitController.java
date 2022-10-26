@@ -1,26 +1,18 @@
-package com.nhnacademy.nhnmart.servlet;
+package com.nhnacademy.nhnmart.controller;
 
 import com.nhnacademy.nhnmart.domain.Food;
 import com.nhnacademy.nhnmart.domain.FoodStand;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.*;
 
 @Slf4j
-@WebServlet(name = "initServlet", urlPatterns = "/init")
-public class InitServlet extends HttpServlet {
+public class InitController implements Command {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    public String excute(HttpServletRequest req, HttpServletResponse resp) {
         FoodStand foodStand = new FoodStand();
 
         ServletContext servletContext = req.getServletContext();
@@ -39,9 +31,6 @@ public class InitServlet extends HttpServlet {
         }
 
         servletContext.setAttribute("foodStand", foodStand.getFoods());
-
-//        RequestDispatcher rd = req.getRequestDispatcher("/init.jsp");
-//        rd.forward(req, resp);
-        req.setAttribute("view", "/init.jsp");
+        return "/init.jsp";
     }
 }
