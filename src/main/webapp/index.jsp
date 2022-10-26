@@ -26,7 +26,12 @@
 <br>
 
 <c:if test="${sessionScope.id != null}">
-    <a href="/logout.do"><fmt:message key="logout"/></a>
+    <a href="/logout.do"><fmt:message key="Logout"/></a><br>
+    <p><fmt:message key="money"></fmt:message> : <c:out value="${money}"></c:out></p>
+</c:if>
+
+<c:if test="${sessionScope.id == null}">
+    <a href="/loginForm.do"><fmt:message key="Login"></fmt:message></a>
 </c:if>
 
 </fmt:bundle>

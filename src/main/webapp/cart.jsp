@@ -25,8 +25,14 @@
     <c:set var="total" value="${total} + ${map.key.getPrice() * map.value}"></c:set>
 </c:forEach>
 
-<fmt:message key="총금액"></fmt:message> <c:out value="${totalPrice}"></c:out>
+    <fmt:message key="총금액"></fmt:message> <c:out value="${totalPrice}"></c:out>
 
+    <br>
+    <br>
+<form method="post" action="/pay.do">
+    <input value="${total}" type="hidden">
+    <button type="submit"><fmt:message key="pay"></fmt:message></button>
+</form>
 
 </fmt:bundle>
 </body>

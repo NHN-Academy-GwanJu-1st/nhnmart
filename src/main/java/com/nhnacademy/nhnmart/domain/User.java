@@ -8,5 +8,9 @@ public class User {
     private String password;
     private int moeny;
 
-
+    public User(String id, String password) {
+        this.id = id;
+        this.password = password;
+        moeny = 20000;
+    }
 }
