@@ -76,6 +76,8 @@ public class FrontController extends HttpServlet {
             command = new CartController();
         } else if ("/local.do".equals(servletPath)) {
             command = new LocalController();
+        } else if ("/pay.do".equals(servletPath)) {
+            command = new PayController();
         }
 
 //        return processingServletPath;

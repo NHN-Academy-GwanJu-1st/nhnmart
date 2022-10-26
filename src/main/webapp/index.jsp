@@ -26,8 +26,9 @@
 <br>
 
 <c:if test="${sessionScope.id != null}">
+    <c:set var="user" value="${user}"></c:set>
     <a href="/logout.do"><fmt:message key="Logout"/></a><br>
-    <p><fmt:message key="money"></fmt:message> : <c:out value="${money}"></c:out></p>
+    <p><fmt:message key="money"></fmt:message> : <c:out value="${user.getMoney()}"></c:out></p>
 </c:if>
 
 <c:if test="${sessionScope.id == null}">

@@ -13,6 +13,7 @@ public class LogoutController implements Command {
 
         if (Objects.nonNull(session)) {
             session.invalidate();
+            req.getServletContext().removeAttribute("user");
             return "redirect:/index.jsp";
         } else {
             return "redirect:/login.jsp";

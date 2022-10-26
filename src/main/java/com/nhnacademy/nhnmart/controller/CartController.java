@@ -2,6 +2,7 @@ package com.nhnacademy.nhnmart.controller;
 
 import com.nhnacademy.nhnmart.domain.Basket;
 import com.nhnacademy.nhnmart.domain.Food;
+import com.nhnacademy.nhnmart.exception.AmountException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletContext;
@@ -15,7 +16,7 @@ public class CartController implements Command {
     private Basket basket = new Basket();
 
     @Override
-    public String excute(HttpServletRequest req, HttpServletResponse resp) {
+    public String excute(HttpServletRequest req, HttpServletResponse resp) throws AmountException {
         ServletContext servletContext = req.getServletContext();
 
         int totalPrice = 0;
@@ -49,7 +50,7 @@ public class CartController implements Command {
         }
 
         if (basketCount != 0) {
-            throw new NoSuchElementException("식품매대에 재고가 부족할 때");
+            throw new AmountException("상품 수량이 부족합니다.");
         }
 
         servletContext.setAttribute("buyMap", buyMap);

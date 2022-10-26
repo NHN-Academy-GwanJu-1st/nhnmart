@@ -21,9 +21,9 @@ public class LoginController implements Command {
             HttpSession session = req.getSession();
             session.setAttribute("id", id);
             User user = new User(id, password);
-            req.getServletContext().setAttribute("money", user.getMoeny());
+            req.getServletContext().setAttribute("user", user);
 
-            return "redirect:/loginForm.do";
+            return "redirect:/";
         } else {
             return "redirect:/loginForm.do";
         }
