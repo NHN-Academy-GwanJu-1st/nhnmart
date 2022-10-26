@@ -40,7 +40,8 @@ public class InitServlet extends HttpServlet {
 
         servletContext.setAttribute("foodStand", foodStand.getFoods());
 
-        RequestDispatcher rd = req.getRequestDispatcher("/init.jsp");
-        rd.forward(req, resp);
+//        RequestDispatcher rd = req.getRequestDispatcher("/init.jsp");
+//        rd.forward(req, resp);
+        req.setAttribute("view", "/init.jsp");
     }
 }

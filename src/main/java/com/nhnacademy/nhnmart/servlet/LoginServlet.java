@@ -17,19 +17,19 @@ import java.util.Objects;
 })
 public class LoginServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        HttpSession session = req.getSession(false);
-        if (Objects.isNull(session)) {
-            RequestDispatcher rd = req.getRequestDispatcher("/loginForm.jsp");
-            rd.forward(req, resp);
-        } else {
-            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-            rd.forward(req,resp);
-//            resp.sendRedirect("/index.jsp");
-        }
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        HttpSession session = req.getSession(false);
+//        if (Objects.isNull(session)) {
+//            RequestDispatcher rd = req.getRequestDispatcher("/loginForm.jsp");
+//            rd.forward(req, resp);
+//        } else {
+//            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+//            rd.forward(req,resp);
+////            resp.sendRedirect("/index.jsp");
+//        }
+//    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -42,9 +42,11 @@ public class LoginServlet extends HttpServlet {
         if (initId.equals(id) && initPassword.equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("id", id);
-            resp.sendRedirect("/login");
+//            resp.sendRedirect("/login");
+            req.setAttribute("view", "redirect:/loginForm.do");
         } else {
-            resp.sendRedirect("/login");
+//            resp.sendRedirect("/login");
+            req.setAttribute("view", "redirect:/loginForm.do");
         }
     }
 

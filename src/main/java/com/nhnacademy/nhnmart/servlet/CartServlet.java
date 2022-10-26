@@ -20,12 +20,11 @@ public class CartServlet extends HttpServlet {
 
     private Basket basket = new Basket();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/cart.jsp");
-        rd.forward(req, resp);
-
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        RequestDispatcher rd = req.getRequestDispatcher("/cart.jsp");
+//        rd.forward(req, resp);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -68,6 +67,7 @@ public class CartServlet extends HttpServlet {
 
         servletContext.setAttribute("buyMap", buyMap);
         servletContext.setAttribute("totalPrice", totalPrice);
-        resp.sendRedirect("/cart");
+//        resp.sendRedirect("/cart");
+        req.setAttribute("view", "redirect:/cartList.do");
     }
 }

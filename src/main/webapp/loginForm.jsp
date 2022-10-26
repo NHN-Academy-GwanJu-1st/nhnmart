@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/login">
+<form method="post" action="/login.do">
   <input type="text" name="id" placeholder="id = admin"></br>
   <input type="text" name="password" placeholder="password = 1234"></br>
   <button type="submit">Login</button>

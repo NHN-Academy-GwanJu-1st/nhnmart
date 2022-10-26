@@ -1,5 +1,6 @@
 package com.nhnacademy.nhnmart.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,20 +10,19 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet(name = "logoutServlet", urlPatterns = "/logout")
-public class LogoutServlet extends HttpServlet {
-
+@WebServlet(name = "loginFormServlet", urlPatterns = "/loginForm")
+public class LoginFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-
-        if (Objects.nonNull(session)) {
-            session.invalidate();
-//            resp.sendRedirect("/index.jsp");
-            req.setAttribute("view","redirect:/index.jsp");
+        if (Objects.isNull(session)) {
+//            RequestDispatcher rd = req.getRequestDispatcher("/loginForm.jsp");
+//            rd.forward(req, resp);
+            req.setAttribute("view", "/loginForm.jsp");
         } else {
-//            resp.sendRedirect("/login");
-            req.setAttribute("view","redirect:/login.jsp");
+            req.setAttribute("view", "/index.jsp");
+//            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+//            rd.forward(req,resp);
         }
     }
 }

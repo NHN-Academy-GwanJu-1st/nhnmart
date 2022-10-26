@@ -32,7 +32,9 @@ public class FoodsServlet extends HttpServlet {
         req.setAttribute("foodList", foodList);
         req.setAttribute("foodStand", foodStand);
 
-        RequestDispatcher rd = req.getRequestDispatcher("/foodStand.jsp");
-        rd.forward(req, resp);
+//        RequestDispatcher rd = req.getRequestDispatcher("/foodStand.jsp");
+//        rd.forward(req, resp);
+
+        req.setAttribute("view", "/foodStand.jsp");
     }
 }

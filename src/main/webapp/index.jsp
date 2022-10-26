@@ -6,14 +6,14 @@
 </head>
 <body>
 <br>
-<a href="/init">init</a></br>
-<a href="/foods">foods</a></br>
-<a href="/cart">cart</a>
+<a href="/init.do">init</a></br>
+<a href="/foods.do">foods</a></br>
+<a href="/cartList.do">cart</a>
 
 <br>
 
 <c:if test="${sessionScope.id != null}">
-    <a href="/logout">logout</a>
+    <a href="/logout.do">logout</a>
 </c:if>
 
 
