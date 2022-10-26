@@ -4,53 +4,9 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-
-    <!-- filter -->
-
-    <filter>
-        <filter-name>loginCheckFilter</filter-name>
-        <filter-class>com.nhnacademy.nhnmart.filter.LoginCheckFilter</filter-class>
-        <init-param>
-            <param-name>exclude-urls</param-name>
-            <param-value>
-                /loginForm.jsp
-                /login
-                /index.jsp     <!-- welcome page -->
-                /               <!-- root -->
-                /init           <!-- init -->
-                /foods
-            </param-value>
-        </init-param>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>loginCheckFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
     <!-- welcome page-->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-
-    <!-- login Mapping -->
-    <servlet>
-        <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.nhnacademy.nhnmart.servlet.LoginServlet</servlet-class>
-        <init-param>
-            <param-name>id</param-name>
-            <param-value>admin</param-value>
-        </init-param>
-        <init-param>
-            <param-name>password</param-name>
-            <param-value>1234</param-value>
-        </init-param>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>loginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
 
 </web-app>

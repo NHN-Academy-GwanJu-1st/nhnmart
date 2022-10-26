@@ -3,6 +3,8 @@ package com.nhnacademy.nhnmart.filter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,15 +16,24 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
+@WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*", initParams = {
+        @WebInitParam(name = "exclude-urls",
+                value = "/\n"+
+                        "/loginForm.jsp\n" +
+                        "/login\n" +
+                        "/index.jsp\n" +
+                        "/init\n" +
+                        "/foods\n")
+})
 public class LoginCheckFilter implements Filter {
 
     private Set<String> excludeUrls = new HashSet<>();
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String urls = filterConfig.getInitParameter("exclude-urls");
 
-        excludeUrls = Arrays.stream(urls.split("\n"))
+        excludeUrls = Arrays.stream(urls.trim().split("\n"))
                 .map(String::trim)
                 .collect(Collectors.toSet());
 
